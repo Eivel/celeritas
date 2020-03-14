@@ -1,0 +1,12 @@
+{
+  "channels": [
+    {
+      "name": "Channel1",
+      "id": "123"
+    },
+    {
+      "name": "Channel2" ,
+      "id": "-100456"
+    }
+  ]
+}

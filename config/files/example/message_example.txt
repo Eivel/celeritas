@@ -1,0 +1,7 @@
+Description of the command and how it depends on the API user being a mutual contact.
+
+*Channels category 1:*
+
+Channel 1 - Channel 1 description.
+
+Channel 2 - Channel 2 description.
