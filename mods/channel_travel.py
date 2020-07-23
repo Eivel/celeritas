@@ -23,6 +23,10 @@ class ChannelTravel():
             update.message.reply_text("Nie masz uprawnień do korzystania z tej komendy.")
             return
 
+        if update.message.chat.type != "private":
+            update.message.reply_text("Zapytaj mnie o kanały na PW: @DraconisCeleritasBot")
+            return
+
         keyboard = []
         for c in self.channels:
             channel_name = c["name"]
