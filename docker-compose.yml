@@ -1,0 +1,13 @@
+version: '3'
+services:
+  celeritas:
+    image: celeritas_dev_compose
+    build:
+      context: .
+      dockerfile: docker/development/Dockerfile
+    container_name: celeritas
+    volumes:
+      - .:/app
+    stdin_open: true
+    tty: true
+    env_file: .env

@@ -1,3 +1,3 @@
 python-dotenv==0.9.1
 python-telegram-bot==12.2
-Telethon==1.10.9
+telethon==1.15.0
