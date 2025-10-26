@@ -1,4 +1,4 @@
-from telethon import TelegramClient, sync
+from telethon.sync import TelegramClient
 from dotenv import load_dotenv
 import os
 import sys
@@ -12,10 +12,19 @@ load_dotenv()
 
 channel_id = input('Please enter channel ID: ')
 
-telegram_config = TelegramConfig()
-telegram_client = TelegramClient(telegram_config.telegram_api_session_name, telegram_config.telegram_api_id, telegram_config.telegram_api_hash).start()
 
-participants = telegram_client.get_participants(int(channel_id))
-details = [{"username": o.username, "id": o.id } for o in participants]
-for d in details:
-  print(d)
+def main():
+    telegram_config = TelegramConfig()
+    with TelegramClient(
+        telegram_config.telegram_api_session_name,
+        telegram_config.telegram_api_id,
+        telegram_config.telegram_api_hash
+    ) as client:
+        participants = client.get_participants(int(channel_id))
+        details = [{"username": o.username, "id": o.id} for o in participants]
+        for d in details:
+            print(d)
+
+
+if __name__ == "__main__":
+    main()

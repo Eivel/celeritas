@@ -7,16 +7,17 @@ The process saves moderators/admins a lot of time and helps to connect many grou
 ## How it works
 
 The bot uses MTProto API ([Telethon](https://github.com/LonamiWebs/Telethon)) to invite users to groups. Standard bots created with BotFather don't have an option to invite users to group chats for safety reasons.
+As of the latest update the project targets Telethon 1.34.x, which restores compatibility with new 64-bit Telegram user IDs.
 
 The bot created with BotFather is responsible for kicking users from group chats.
 
 ## Requirements
 
+- Python 3.10+ runtime (local or via provided Docker images).
 - Telegram account with generated ID and Hash ([setup details](https://core.telegram.org/api/obtaining_api_id)).
+- Telegram Bot Token (generated through BotFather).
 
 I strongly recommend you buy a second phone card and set up a new Telegram account dedicated to this bot. Telegram has some spam prevention systems that may flag your automated account as a spambot and ban it permanently. When you write to support, they lift the ban, but it may take days or even weeks.
-
-- Telegram Bot Token (generated through BotFather).
 
 ## Configuration
 
@@ -74,6 +75,7 @@ The bot is fully dockerized. You need to provide the container with configuratio
 I recommend not to keep the files in the image itself, especially if you use public Docker Hub.
 
 The bot will need a Telegram API session file to connect to the API. You can generate one in development by running the bot for the first time (with correct Telegram API ID and Hash). You will be prompted for a phone number and an authentication code that's going to be sent to your new account as a private message. After the session file is created, you can mount it the same way as you do with the configuration files.
+Upgrading from Telethon 1.15.0 or earlier? Remove the old session file before the first run so Telethon can re-authenticate using 64-bit account identifiers.
 
 The session file name is configured by `TELEGRAM_API_SESSION_NAME` env variable.
 

@@ -1,4 +1,4 @@
-from telethon import TelegramClient, sync
+from telethon.sync import TelegramClient
 from telethon.tl.types import InputPhoneContact
 from telethon.tl.functions.contacts import ImportContactsRequest
 from dotenv import load_dotenv
@@ -15,9 +15,17 @@ load_dotenv()
 phone_number = input('Please enter phone number: ')
 name = input('Please enter name: ')
 
-telegram_config = TelegramConfig()
-telegram_client = TelegramClient(telegram_config.telegram_api_session_name, telegram_config.telegram_api_id, telegram_config.telegram_api_hash).start()
+def main():
+    telegram_config = TelegramConfig()
+    with TelegramClient(
+        telegram_config.telegram_api_session_name,
+        telegram_config.telegram_api_id,
+        telegram_config.telegram_api_hash
+    ) as client:
+        contact = InputPhoneContact(client_id=0, phone=phone_number, first_name=name, last_name='')
+        result = client(ImportContactsRequest([contact]))
+        print(result.users[0].username)
 
-contact = InputPhoneContact(client_id = 0, phone = phone_number, first_name=name, last_name='')
-result = telegram_client(ImportContactsRequest([contact]))
-print(result.users[0].username)
+
+if __name__ == "__main__":
+    main()
