@@ -2,7 +2,6 @@ FROM python:3.10-slim
 
 RUN set -ex \
     && RUN_DEPS=" \
-    libpcre3 \
     postgresql-client \
     " \
     && seq 1 8 | xargs -I{} mkdir -p /usr/share/man/man{} \
@@ -14,7 +13,6 @@ ADD requirements.txt /requirements.txt
 RUN set -ex \
     && BUILD_DEPS=" \
     build-essential \
-    libpcre3-dev \
     libpq-dev \
     " \
     && apt-get update && apt-get install -y --no-install-recommends $BUILD_DEPS \
@@ -25,7 +23,7 @@ RUN set -ex \
 
 RUN mkdir /app/
 WORKDIR /app/
-ADD config /app/config
+RUN mkdir /app/config
 ADD mods /app/mods
 ADD bot.py /app/bot.py
 
